@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="auth-container">
+    <h1>Login</h1>
+    <form method="post">
+        <label for="username">Username</label>
+        <input id="username" type="text" name="username" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <p class="hint">Need an account? Contact the administrator.</p>
+</div>
+{% endblock %}

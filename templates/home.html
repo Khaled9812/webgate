@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1 class="page-title">Saved Websites</h1>
+{% if websites %}
+<div class="card-grid">
+    {% for site in websites %}
+    <div class="card">
+        <a href="{{ site['url'] }}" target="_blank">
+            {% if site['image_url'] %}
+            <img src="{{ site['image_url'] }}" alt="{{ site['name'] }}">
+            {% else %}
+            <img src="{{ default_image }}" alt="No image">
+            {% endif %}
+            <div class="card-title">{{ site['name'] }}</div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>You have not saved any websites yet. Use the Add page to create one.</p>
+{% endif %}
+{% endblock %}

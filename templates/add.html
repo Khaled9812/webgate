@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1 class="page-title">Add Website</h1>
+<form method="post" enctype="multipart/form-data" class="form-card add-site-form">
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name" required>
+    <label for="url">URL</label>
+    <input id="url" type="url" name="url" required placeholder="https://example.com">
+    <!-- Allow uploading an image instead of providing a URL -->
+    <label for="image">Image (optional)</label>
+    <input id="image" type="file" name="image">
+    {% if is_admin %}
+    <label for="scope">Visibility</label>
+    <select id="scope" name="scope">
+        <option value="personal" selected>Personal</option>
+        <option value="global">Global (visible to all)</option>
+    </select>
+    {% endif %}
+    <button type="submit">Add Website</button>
+</form>
+
+<h2 class="section-title">Existing Websites</h2>
+{% if sites %}
+<table class="table-list">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>URL</th>
+            {% if is_admin %}<th>Owner</th>{% endif %}
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for site in sites %}
+        <tr>
+            <td>{{ site['name'] }}</td>
+            <td><a href="{{ site['url'] }}" target="_blank">{{ site['url'] }}</a></td>
+            {% if is_admin %}
+            <td>{{ site['username'] if site['username'] else 'Global' }}</td>
+            {% endif %}
+            <td>
+                <form method="post" class="inline-form">
+                    <input type="hidden" name="delete_id" value="{{ site['id'] }}">
+                    <button type="submit" onclick="return confirm('Remove this website?');">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No websites have been added yet.</p>
+{% endif %}
+{% endblock %}

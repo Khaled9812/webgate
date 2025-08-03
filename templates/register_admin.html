@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="auth-container">
+    <h1>Create Admin Account</h1>
+    <form method="post">
+        <label for="username">Username</label>
+        <input id="username" type="text" name="username" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" required>
+        <label for="confirm">Confirm Password</label>
+        <input id="confirm" type="password" name="confirm" required>
+        <button type="submit">Create</button>
+    </form>
+</div>
+{% endblock %}
